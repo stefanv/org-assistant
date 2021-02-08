@@ -46,7 +46,7 @@ function assistantDateToOrg(dateStr) {
 
   dateStr = dateStr.split(' ');
   month = dateStr[0];
-  day = dateStr[1].substring(0, 2);
+  day = dateStr[1].replace(',', '');
   year = dateStr[2].substring(0, 4);
   hour = dateStr[4].substring(0, 2);
   minute = dateStr[4].substring(3, 5);
@@ -59,7 +59,7 @@ function assistantDateToOrg(dateStr) {
     hour = (parseInt(hour) + 12).toString();
   }
 
-  return Utilities.formatString("[%s-%s-%s %s:%s]", year, month_nr, day, hour, minute);
+  return Utilities.formatString("[%d-%02d-%02d %s:%s]", parseInt(year, 10), parseInt(month_nr, 10), parseInt(day, 10), hour, minute);
 }
 
 function assistantSpreadsheetToOrg(googleDriveFileId, clearSheet) {
